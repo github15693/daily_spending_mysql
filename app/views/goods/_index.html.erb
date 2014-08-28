@@ -1,0 +1,25 @@
+<% if @goods.blank? %>
+    <h3>Goods is empty!</h3>
+    <% else %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @goods.each do |good| %>
+      <tr class="private-dhk in_place_class">
+        <td><%= good.id%></td>
+        <td><%= best_in_place good, :name, type: :input %></td>
+        <td><%=best_in_place good,:price, type: :input %></td>
+        <td><%= link_to '', good, method: :delete, class:'glyphicon glyphicon-trash font-size-20', data: { confirm: 'Are you sure?' }, remote:true %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

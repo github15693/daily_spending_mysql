@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
 
+  resources :goods
+
+  resources :roles
+
+  resources :homes
+
+  resources :managements do
+    collection do
+      get 'add_goods'
+    end
+  end
+
   devise_for :users, :controllers => {:registrations =>
                                           "registrations", :confirmations => "confirmations", :sessions =>
                                           "sessions"}
@@ -34,9 +46,7 @@ Rails.application.routes.draw do
   #     end
   #   end
 
-  resources :homes do
 
-  end
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales

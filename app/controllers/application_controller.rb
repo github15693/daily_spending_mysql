@@ -4,9 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :set_tab
   authorize_resource :class => false
   include ActionController::MimeResponds
   include ApplicationHelper
+
+  def set_tab
+    session['nav_tab'.to_sym] = controller_name.to_sym
+  end
 
   def after_sign_in_path_for(resource)
     homes_path

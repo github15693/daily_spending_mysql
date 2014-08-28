@@ -11,7 +11,80 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140827061232) do
+ActiveRecord::Schema.define(version: 20140828044312) do
+
+  create_table "function_roles", force: true do |t|
+    t.string   "desciption"
+    t.integer  "role_id"
+    t.integer  "function_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "functions", force: true do |t|
+    t.string   "controller"
+    t.string   "action"
+    t.string   "desciption"
+    t.boolean  "enabled",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "goods", force: true do |t|
+    t.string   "name"
+    t.float    "price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "order_details", force: true do |t|
+    t.float    "price"
+    t.integer  "quantity",    default: 1
+    t.float    "money_total"
+    t.integer  "good_id"
+    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "order_statistics", force: true do |t|
+    t.integer  "order_id"
+    t.integer  "statistic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", force: true do |t|
+    t.string   "name"
+    t.boolean  "liquidate"
+    t.float    "money_total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "name"
+    t.text     "desciption"
+    t.boolean  "enabled",    default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "statistics", force: true do |t|
+    t.float    "money_init",      default: 400.0
+    t.float    "money_last_week"
+    t.float    "money_remain"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_roles", force: true do |t|
+    t.string   "desciption"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"

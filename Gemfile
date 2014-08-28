@@ -9,7 +9,9 @@ gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use bootstrap for stylesheets
-
+#jquery-ui
+gem 'jquery-ui-sass-rails', '~> 4.0.3.0'
+#bootstrap
 gem 'bootstrap-sass', '~> 3.1.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

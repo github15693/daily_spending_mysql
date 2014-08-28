@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  controller: MyString
+  action: MyString
+  desciption: MyString
+  enabled: false
+
+two:
+  controller: MyString
+  action: MyString
+  desciption: MyString
+  enabled: false

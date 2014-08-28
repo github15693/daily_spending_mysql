@@ -1,0 +1,18 @@
+<div class="row frame-body margin-top-20">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :spending %>">
+        <a href="/managements">Daily Spending</a>
+      </li>
+      <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :add_goods %>">
+        <a href="/managements/add_goods">Add Goods</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-12 margin-top-20">
+    <%= render 'goods/form' %>
+  </div>
+  <div class="col-md-12 margin-top-20 load-view-add-goods">
+    <%= render 'goods/index' %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  money_init: 1.5
+  money_last_week: 1.5
+  money_remain: 1.5
+
+two:
+  money_init: 1.5
+  money_last_week: 1.5
+  money_remain: 1.5

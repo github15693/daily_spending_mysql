@@ -22,4 +22,21 @@
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require best_in_place
 //= require best_in_place.purr
+//= require jquery.ui.all
 //= require_tree .
+
+jQuery(function () {
+    $('.best_in_place').best_in_place()
+    $(document).on('click', '.in_place_class', function () {
+        $('.in_place_class span form input:text').addClass('form-control input-sm');
+        $('.in_place_class span form input:button').addClass('btn btn-danger');
+        $('.in_place_class span form input:submit').addClass('btn btn-primary');
+    })
+})
+//function alert message
+function delayedAlert(msg, time) {
+    $('#notifications').html("<div class='alert alert-success alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert'><span aria-hidden='true'>&times;</span><span class='sr-only'>Close</span></button>" + msg + "</div>");
+    setTimeout(function () {
+        $('#notifications').html('');
+    }, time);
+};
