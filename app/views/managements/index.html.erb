@@ -1,40 +1,51 @@
 <div class="row frame-body margin-top-20">
-    <div class="col-md-12">
-      <ul class="nav nav-tabs" role="tablist">
-        <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :spending %>">
-          <a href="/managements">Daily Spending</a>
-        </li>
-        <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :add_goods %>">
-          <a href="/managements/add_goods">Add Goods</a>
-        </li>
-      </ul>
-    </div>
-    <div class="col-md-12">
-      <form>
-        <fieldset>
-          <legend>Information:</legend>
-          <div class="form-inline">
-            <label>Date Expiry: </label>
-              <div class="col-md-2 input-group date" id="datetime-picker" data-date-format="DD/MM/YYYY">
-                <input class="form-control" id="textFieldDate" name="preferred_date" placeholder="DD/MM/YYYY" readonly="true" type="text">
-                <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
-              </div>
-            <label class="margin-left-20">Initial: </label>
-            <input value="About 400" class="form-control width-110"/>
-            <label class="margin-left-20">Spending: </label>
-            <input value="About 380" class="form-control width-110"/>
-            <label class="margin-left-20">Remain: </label>
-            <input value="About 20" class="form-control width-110"/>
-           </div>
-        </fieldset>
-      </form>
-    </div>
+  <div class="col-md-12">
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :spending %>">
+        <a href="/managements">Daily Spending</a>
+      </li>
+      <li class="<%= 'active' if !session[:body_tab].blank? && session[:body_tab] == :add_goods %>">
+        <a href="/managements/add_goods">Add Goods</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-12">
+    <form>
+      <fieldset>
+        <legend>Information:</legend>
+        <div class="form-inline">
+          <label>Date Expiry: </label>
+
+          <div class="col-md-2 input-group date">
+            <input style="width:110px" id='money-init' class="form-control " value="<%= @expiry_date.strftime '%d/%m%Y' %>" id="textFieldDate" name="preferred_date" placeholder="DD/MM/YYYY" type="text" readonly>
+            <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
+          </div>
+          <label class="margin-left-20">Initial: </label>
+          <input value="About 400" class="form-control width-110" onchange="update_money_init()"/>
+          <script>
+            function update_money_init(){
+                var i=0
+               var temp = setInterval(function(){
+                   i++;
+                   if (i ==6){
+                       clearInterval(temp)
+                   }
+                    $('#money-remain').toggleClass('border-effect');
+                },150)
+            }
+          </script>
+          <label class="margin-left-20">Spending: </label>
+          <input value="About 380" class="form-control width-110"/>
+          <label class="margin-left-20">Remain: </label>
+          <input id='money-remain' value="About 20" class="form-control width-110"/>
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </div>
 
 <script>
-    $(function() {
-        $( ".drag-test" ).draggable();
-    });
+    //update expiry date
 
     var currentdate = new Date();
     var date_val = currentdate.getDate();
@@ -48,13 +59,17 @@
     var datetime = date_val + "/"
             + (month_val) + "/"
             + currentdate.getFullYear();
-    $('#textFieldDate').val(datetime);
-    $(function () {
-        $('#datetime-picker').datetimepicker({
-            pickTime: false,
-            dateFormat: 'dd/mm/yyyy',
-            minDate: currentdate
+//    $('#textFieldDate').val(datetime);
+    $(document).ready(function(){
+        $('.date').datepicker({
+            format: "dd/mm/yyyy",
+            autoclose:true,
+            startDate: new Date()
+            }).on('changeDate', function(){
+            var date = $('#textFieldDate').val();
+            $.post('/managements/update_expiry_date',{date:date},function(data){
+                delayedAlert(data.message,1000)
+            });
         });
     });
-
 </script>

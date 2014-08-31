@@ -23,6 +23,7 @@
 //= require best_in_place
 //= require best_in_place.purr
 //= require jquery.ui.all
+//= require bootstrap-datepicker
 //= require_tree .
 
 jQuery(function () {

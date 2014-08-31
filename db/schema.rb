@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828044312) do
+ActiveRecord::Schema.define(version: 20140830092151) do
+
+  create_table "date_expiries", force: true do |t|
+    t.date     "date_expiry"
+    t.boolean  "completed",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "function_roles", force: true do |t|
     t.string   "desciption"
@@ -32,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140828044312) do
 
   create_table "goods", force: true do |t|
     t.string   "name"
-    t.float    "price"
+    t.float    "price",      default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

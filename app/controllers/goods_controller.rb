@@ -26,8 +26,8 @@ class GoodsController < ApplicationController
   def create
     @goods = Good.all
     @good = Good.new(good_params)
-    if params[:good][:name].blank? || params[:good][:price].blank?
-      return @result = 'Missing value!'
+    if params[:good][:name].blank?
+      return @result = 'Missing goods name value!'
     end
     respond_to do |format|
       if @good.save
@@ -79,6 +79,9 @@ class GoodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def good_params
+      if params[:good][:price].blank?
+        params[:good][:price] = 0
+      end
       params.require(:good).permit(:name, :price)
     end
 end

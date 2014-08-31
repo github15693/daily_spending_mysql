@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_expiry: 2014-08-30
+  completed: false
+
+two:
+  date_expiry: 2014-08-30
+  completed: false

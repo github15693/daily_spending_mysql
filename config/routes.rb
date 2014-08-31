@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :managements do
     collection do
       get 'add_goods'
+      post 'update_expiry_date'
     end
   end
 
