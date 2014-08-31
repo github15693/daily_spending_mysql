@@ -1,4 +1,5 @@
 body{
+  position: relative;
   margin-top: 50px;
   background: url("/assets/body-bg.png");
 }
@@ -16,6 +17,9 @@ body{
   box-shadow: 0px 0px 7px 1px green;
 }
 fieldset{
+  position: relative;
+  display: inline-table;
+  top: 10px;
   border: 1px solid grey;
   padding-left: 20px;
   padding-right: 20px;
@@ -25,8 +29,7 @@ fieldset{
 }
 legend{
    border: 1px solid grey;
-   text-align: center;
-   max-width: 170px;
+   width: 120px;
    margin-top: 20px;
    padding: 5px;
    font-size: 15px;
@@ -36,6 +39,19 @@ legend{
    background: linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
    box-shadow: 0px 0px 3px 2px #D0D0D0;
  }
+.money-last-week{
+  position: relative;
+  border: 1px solid grey;
+  width: 180px;
+  text-align: center;
+  margin-top: -55px;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  background: radial-gradient(90px 30px, #FBFBFB,#FBFBFB, #8FB6AE);
+  box-shadow: 0px 0px 3px 2px #D0D0D0;
+  margin-bottom: 0px;
+}
 #notifications {
   position: fixed;
   top: 45%;

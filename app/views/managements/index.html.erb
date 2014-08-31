@@ -13,31 +13,19 @@
     <form>
       <fieldset>
         <legend>Information:</legend>
+        <div class="form-group form-inline money-last-week pull-right"><%= image_tag 'dolar.png' %><%= "#{@statistic.money_last_week} of last week!" %></div>
         <div class="form-inline">
           <label>Date Expiry: </label>
-
           <div class="col-md-2 input-group date">
-            <input style="width:110px" id='money-init' class="form-control " value="<%= @expiry_date.strftime '%d/%m%Y' %>" id="textFieldDate" name="preferred_date" placeholder="DD/MM/YYYY" type="text" readonly>
+            <input data-date-id='<%= @statistic.date_expiry.id %>' style="width:110px" class="form-control " value="<%= @statistic.date_expiry.date_expiry.strftime '%d/%m%Y' %>" id="textFieldDate" name="preferred_date" placeholder="DD/MM/YYYY" type="text" readonly>
             <span class="input-group-addon"><span class="glyphicon-calendar glyphicon"></span></span>
           </div>
           <label class="margin-left-20">Initial: </label>
-          <input value="About 400" class="form-control width-110" onchange="update_money_init()"/>
-          <script>
-            function update_money_init(){
-                var i=0
-               var temp = setInterval(function(){
-                   i++;
-                   if (i ==6){
-                       clearInterval(temp)
-                   }
-                    $('#money-remain').toggleClass('border-effect');
-                },150)
-            }
-          </script>
+          <input id='money-init' value="<%= @statistic.money_init %>" class="form-control width-110" onchange="update_money_init()"/>
           <label class="margin-left-20">Spending: </label>
-          <input value="About 380" class="form-control width-110"/>
+          <input id='money-payment' value="<%= @statistic.money_payment %>" class="form-control width-110"/>
           <label class="margin-left-20">Remain: </label>
-          <input id='money-remain' value="About 20" class="form-control width-110"/>
+          <input id='money-remain' value="<%= @statistic.money_remain %>" class="form-control width-110"/>
         </div>
       </fieldset>
     </form>
@@ -45,6 +33,21 @@
 </div>
 
 <script>
+  //update money initialize
+    function update_money_init(){
+        borderEffect('#money-remain','border-effect',3,150)
+    }
+    //effect border
+    function borderEffect(selector, cssEffect, num_effect, deplay){
+        var i=0
+        var temp = setInterval(function(){
+            i++;
+            if (i ==num_effect*2){
+                clearInterval(temp)
+            }
+            $(selector).toggleClass(cssEffect);
+        },deplay)
+    }
     //update expiry date
 
     var currentdate = new Date();
@@ -67,7 +70,8 @@
             startDate: new Date()
             }).on('changeDate', function(){
             var date = $('#textFieldDate').val();
-            $.post('/managements/update_expiry_date',{date:date},function(data){
+            var id = $('#textFieldDate').data('date-id');
+            $.post('/managements/update_expiry_date',{date:date, id:id},function(data){
                 delayedAlert(data.message,1000)
             });
         });

@@ -15,7 +15,8 @@ ActiveRecord::Schema.define(version: 20140830092151) do
 
   create_table "date_expiries", force: true do |t|
     t.date     "date_expiry"
-    t.boolean  "completed",   default: false
+    t.boolean  "completed",    default: false
+    t.integer  "statistic_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -79,8 +80,9 @@ ActiveRecord::Schema.define(version: 20140830092151) do
 
   create_table "statistics", force: true do |t|
     t.float    "money_init",      default: 400.0
-    t.float    "money_last_week"
-    t.float    "money_remain"
+    t.float    "money_last_week", default: 0.0
+    t.float    "money_remain",    default: 0.0
+    t.float    "money_payment",   default: 0.0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

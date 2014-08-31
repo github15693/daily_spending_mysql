@@ -3,7 +3,7 @@ class CreateDateExpiries < ActiveRecord::Migration
     create_table :date_expiries do |t|
       t.date :date_expiry
       t.boolean :completed, default:0
-
+      t.belongs_to :statistic
       t.timestamps
     end
   end

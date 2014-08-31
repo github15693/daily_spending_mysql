@@ -2,7 +2,12 @@ class ManagementsController < ApplicationController
 
   def index
     session[:body_tab]=:spending
-    @expiry_date = get_expiry_date
+    if Statistic.last.blank?
+      @statistic = Statistic.create()
+      DateExpiry.create(statistic_id:@statistic.id, date_expiry: Time.now + 7.days)
+    else
+      @statistic = Statistic.last
+    end
   end
 
   def add_goods
@@ -12,13 +17,14 @@ class ManagementsController < ApplicationController
   end
 
   def update_expiry_date
-    date = params[:date].to_date()
     begin
+      date = params[:date].to_date()
+      id = params[:id].to_i
       if DateExpiry.last.blank?
         DateExpiry.create(date_expiry: date)
         return render json: {message: 'Create expiry date success!'}
       else
-        DateExpiry.last.update(date_expiry: date)
+        DateExpiry.find(id).update(date_expiry: date)
         return render json: {message: 'Update expiry date success!'}
       end
     end
