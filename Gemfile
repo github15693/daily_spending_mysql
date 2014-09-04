@@ -54,6 +54,11 @@ gem 'best_in_place', github: 'bernat/best_in_place'
 gem 'rails-i18n', '~> 4.0.0'
 # gem redis-server (store i18n)
 gem 'redis'
+#chat
+gem 'private_pub'
+group :production do
+gem 'thin'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

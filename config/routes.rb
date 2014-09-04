@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     collection do
       get 'add_goods'
       post 'update_expiry_date'
+      post 'update_money_init'
     end
   end
 

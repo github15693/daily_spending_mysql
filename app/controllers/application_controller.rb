@@ -1,3 +1,4 @@
+require 'socket'
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -10,6 +11,8 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   def set_tab
+    # @serverSocket = TCPServer.new('','')
+    # @serverSocket.setsockopt(Socket::SDL_Socket, Socket::SO_REUSEADDR, 1)
     session['nav_tab'.to_sym] = controller_name.to_sym
   end
 

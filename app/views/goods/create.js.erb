@@ -1,2 +1,4 @@
 delayedAlert('<%= @result %>', 1000)
+<% publish_to "/realtime" do %>
 $('.load-view-add-goods').html('<%= j render 'goods/index' %>')
+<% end %>
