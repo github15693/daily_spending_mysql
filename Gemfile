@@ -56,9 +56,8 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'redis'
 #chat
 gem 'private_pub'
-group :production do
 gem 'thin'
-end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

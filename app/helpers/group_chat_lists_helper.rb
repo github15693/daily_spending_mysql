@@ -1,0 +1,2 @@
+module GroupChatListsHelper
+end

@@ -1,0 +1,62 @@
+.friend-list-frame{
+    bottom: 0px;
+    right: 0px;
+    position: fixed;
+    background-color: white;
+    border: solid 2px dimgrey;
+
+}
+
+.friend-list{
+    width: 200px;
+    height: 500px;
+    overflow: scroll;
+}
+.friend-list-title{
+    font-weight: bold;
+    color: dodgerblue;
+    padding: 5px;
+    width: 200px;
+    cursor: pointer;
+    background: -webkit-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: -moz-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: -ms-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+}
+/*-webkit-animation: showFrienListFrame 2s ;*/
+/*-moz-animation: showFrienListFrame 2s ;*/
+/*-o-animation: showFrienListFrame 2s ;*/
+/*animation: showFrienListFrame 2s ;*/
+@-webkit-keyframes showFrienListFrame{
+    0%{
+        bottom: -500px;
+    }
+    100%{
+        bottom: 0px;
+    }
+}
+@-moz-keyframes showFrienListFrame{
+    0%{
+        bottom: -500px;
+    }
+    100%{
+        bottom: 0px;
+    }
+}
+@-o-keyframes showFrienListFrame{
+    0%{
+        bottom: -500px;
+    }
+    100%{
+        bottom: 0px;
+    }
+}
+
+@keyframes showFrienListFrame{
+    0%{
+        bottom: -500px;
+    }
+    100%{
+        bottom: 0px;
+    }
+}

@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Daily Spending</title>
+  <title>Games156</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -34,7 +34,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/homes">Daily Spending</a>
+            <a class="navbar-brand" href="/homes">@Games156@</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -69,7 +69,29 @@
     </div>
   </div>
 </div>
+<p>Move the mouse pointer over this paragraph.</p>
 
+<div>
+  <div class="bg-icon-left" onclick="get_user()">
+    <label class="margin-left-10">Add friends</label>
+    <%= image_tag 'add_friend.png', class: 'add-friend-icon'%>
+  </div>
+</div>
+
+<div  class="friend-list-frame">
+<div class="friend-list-title" style="text-align: center" onclick="friendList()">
+  Friend List
+</div>
+  <div id="chat" class="friend-list" style="display: none">
+    <% unless @friend_list.blank? %>
+        <% @friend_list.each do |friend| %>
+        <h5><%= friend.full_name.blank? ? friend.username.truncate(16, separator:' ') : friend.full_name.truncate(16) %></h5>
+            <% end %>
+    <% else %>
+
+    <% end %>
+  </div>
+</div>
 
 <div class="modal fade" id="app-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -111,10 +133,33 @@
 
 <script>
 
+  $(function(){
+      $(".bg-icon-left").hover(
+              function(){
+                  $(this).filter(':not(:animated)').animate({
+                      marginLeft:'0px'
+                  },'slow');
+// This only fires if the row is not undergoing an animation when you mouseover it
+              },
+              function() {
+                  $(this).animate({
+                      marginLeft:'-130px'
+                  },'slow');
+              });
+
+  });
+    function friendList(){
+        $('.friend-list').slideToggle()
+    }
+
     function setLanguage(val) {
         $.post('/homes/setLanguage', {val: val}, function () {
             location.reload(true);
         });
+    }
+
+    function get_user(){
+        $('#app-Modal').modal()
     }
 </script>
 

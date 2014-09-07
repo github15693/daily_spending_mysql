@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :friend_lists
+
+  resources :group_chats
+
+  resources :group_chat_lists
+
   resources :goods
 
   resources :roles

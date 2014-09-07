@@ -1,0 +1,29 @@
+<h1>Listing friend_lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request user</th>
+      <th>Confirm user</th>
+      <th>Is confirm</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friend_lists.each do |friend_list| %>
+      <tr>
+        <td><%= friend_list.request_user %></td>
+        <td><%= friend_list.confirm_user %></td>
+        <td><%= friend_list.is_confirm %></td>
+        <td><%= link_to 'Show', friend_list %></td>
+        <td><%= link_to 'Edit', edit_friend_list_path(friend_list) %></td>
+        <td><%= link_to 'Destroy', friend_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friend list', new_friend_list_path %>

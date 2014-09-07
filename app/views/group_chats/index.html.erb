@@ -1,0 +1,25 @@
+<h1>Listing group_chats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @group_chats.each do |group_chat| %>
+      <tr>
+        <td><%= group_chat.message %></td>
+        <td><%= link_to 'Show', group_chat %></td>
+        <td><%= link_to 'Edit', edit_group_chat_path(group_chat) %></td>
+        <td><%= link_to 'Destroy', group_chat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Group chat', new_group_chat_path %>

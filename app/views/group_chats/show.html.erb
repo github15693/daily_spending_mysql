@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @group_chat.message %>
+</p>
+
+<%= link_to 'Edit', edit_group_chat_path(@group_chat) %> |
+<%= link_to 'Back', group_chats_path %>

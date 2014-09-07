@@ -6,9 +6,26 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :set_tab
+  before_action :get_friend_list
   authorize_resource :class => false
   include ActionController::MimeResponds
   include ApplicationHelper
+
+  def get_friend_list
+    unless current_user.blank?
+      temp = FriendList.where("(request_user= #{current_user.id} OR confirm_user = #{current_user.id}) AND is_confirm = #{true}")
+      @friend_list = []
+      unless temp.blank?
+        temp.each do |t|
+          if t.request_user.to_i == current_user.id.to_i
+            @friend_list << User.find(t.confirm_user.to_i)
+          else
+            @friend_list << User.find(t.request_user.to_i)
+          end
+        end
+      end
+    end
+  end
 
   def set_tab
     # @serverSocket = TCPServer.new('','')
@@ -19,6 +36,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     homes_path
   end
+
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
       format.html do

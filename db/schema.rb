@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140830092151) do
+ActiveRecord::Schema.define(version: 20140907042803) do
 
   create_table "date_expiries", force: true do |t|
     t.date     "date_expiry"
     t.boolean  "completed",    default: false
     t.integer  "statistic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friend_lists", force: true do |t|
+    t.integer  "request_user"
+    t.integer  "confirm_user"
+    t.integer  "is_confirm",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -41,6 +49,27 @@ ActiveRecord::Schema.define(version: 20140830092151) do
   create_table "goods", force: true do |t|
     t.string   "name"
     t.float    "price",      default: 0.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_chat_lists", force: true do |t|
+    t.string   "name",       default: "ID 07/09/2014 13:03:39"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_chat_members", force: true do |t|
+    t.integer  "group_chat_list_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "group_chats", force: true do |t|
+    t.string   "message"
+    t.integer  "group_chat_list_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

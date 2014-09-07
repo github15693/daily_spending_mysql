@@ -1,0 +1,46 @@
+.add-friend-icon{
+    width: 50px;
+    height: 50px;
+    border-radius: 25px 25px 25px 25px;
+    -ms-border-radius: 25px 25px 25px 25px;
+    -moz-border-radius: 25px 25px 25px 25px;
+    -webkit-border-radius: 25px 25px 25px 25px;
+    padding: 5px;
+    position: relative;
+    margin-right: -20px;
+    bottom: 0px;
+    background: -webkit-radial-gradient(#3E872D, #FFFFFF);
+    background: -moz-radial-gradient(#3E872D, #FFFFFF);
+    background: -ms-radial-gradient(#3E872D, #FFFFFF);
+    background: radial-gradient(#3E872D, #FFFFFF);
+}
+.bg-icon-left{
+    position: fixed;
+    margin-left: -130px;
+    cursor: pointer;
+    width: 148px;
+    border-radius: 0px 25px 25px 0px;
+    -ms-border-radius: 0px 25px 25px 0px;
+    -moz-border-radius: 0px 25px 25px 0px;
+    -webkit-border-radius: 0px 25px 25px 0px;
+    background: -webkit-linear-gradient(#D0D0D0, #F3EEEE, #D0D0D0);
+    background: -moz-linear-gradient(#D0D0D0, #F3EEEE, #D0D0D0);
+    background: -ms-linear-gradient(#D0D0D0, #F3EEEE, #D0D0D0);
+    background: linear-gradient(#D0D0D0, #F3EEEE, #D0D0D0);
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    from {left: 0px;}
+    to {left: 100px;}
+}
+/* Chrome, Safari, Opera */
+@-moz-keyframes mymove {
+    from {left: 0px;}
+    to {left: 100px;}
+}
+
+@keyframes mymove {
+    from {left: 0px;}
+    to {left: 100px;}
+}

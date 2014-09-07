@@ -1,0 +1,29 @@
+<%= form_for(@friend_list) do |f| %>
+  <% if @friend_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@friend_list.errors.count, "error") %> prohibited this friend_list from being saved:</h2>
+
+      <ul>
+      <% @friend_list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :request_user %><br>
+    <%= f.number_field :request_user %>
+  </div>
+  <div class="field">
+    <%= f.label :confirm_user %><br>
+    <%= f.number_field :confirm_user %>
+  </div>
+  <div class="field">
+    <%= f.label :is_confirm %><br>
+    <%= f.number_field :is_confirm %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,21 @@
+<%= form_for(@group_chat_list) do |f| %>
+  <% if @group_chat_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@group_chat_list.errors.count, "error") %> prohibited this group_chat_list from being saved:</h2>
+
+      <ul>
+      <% @group_chat_list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
