@@ -13,7 +13,9 @@ class ApplicationController < ActionController::Base
   authorize_resource :class=> false
 
   def total_confirm
-    @total_confirm = FriendList.where(confirm_user: current_user.id.to_i).size > 0 ? FriendList.where(confirm_user: current_user.id).size : 0
+    unless current_user.blank?
+      @total_confirm = FriendList.where(confirm_user: current_user.id.to_i).size > 0 ? FriendList.where(confirm_user: current_user.id).size : 0
+    end
   end
 
   def get_friend_list
