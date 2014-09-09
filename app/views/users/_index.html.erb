@@ -1,0 +1,52 @@
+<table class="datatable">
+  <thead>
+  <th>#</th>
+  <th style="width: 90px">Full Name</th>
+  <th style="width: 90px">Email</th>
+  <th style="width: 120px">Address</th>
+  <th style="width: 50px">---</th>
+  </thead>
+  <tbody>
+  <% unless @users.blank? %>
+      <% i=0; @users.each do |u|; i+=1%>
+          <tr>
+            <td><%= i %></td>
+            <td style="width: 90px"><%= u.full_name %></td>
+            <td style="width: 90px"><%= u.email %></td>
+            <td style="width: 120px"><%= u.address %></td>
+            <% if FriendList.where("request_user=#{u.id} and confirm_user=#{current_user.id} and is_confirm=false").size > 0 || FriendList.where("request_user=#{current_user.id} and confirm_user=#{u.id}  and is_confirm=false").size > 0 %>
+            <td style="width: 50px"><%= 'Waitting confirm' %></td>
+                <% elsif FriendList.where("request_user=#{u.id} and confirm_user=#{current_user.id} and is_confirm=true").size > 0 || FriendList.where("request_user=#{current_user.id} and confirm_user=#{u.id}  and is_confirm=true").size > 0%>
+                <td style="width: 50px"><%= 'Friend' %></td>
+                <% else %>
+                <td >
+              <%= form_tag friend_lists_path, remote:true, id:i do |f| %>
+                  <%= hidden_field_tag 'friend_list[request_user]', current_user.id %>
+                  <%= hidden_field_tag 'friend_list[confirm_user]', u.id %>
+                  <%= hidden_field_tag 'friend_list[td_id]', i %>
+              <%= submit_tag 'Add friend', class: 'btn btn-success' %>
+            <% end %>
+            </td>
+            <% end %>
+            </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<%= subscribe_to "/users/#{current_user.id}" %>
+<script>
+    jQuery(function () {
+        $('.datatable').dataTable({
+//        "language": {
+//            "url": language
+//        },
+            // sDom: 'Rlfrtip',
+            bProcessing: true,
+            bDeferRender: true,
+            sAjaxSource: $('.datatable').data('source'),
+            sPaginationType: "full_numbers",
+            bStateSave: true
+        });
+    });
+</script>

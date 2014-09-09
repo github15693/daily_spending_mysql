@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :friend_lists
+  resources :friend_lists, :except=>[:index,:new,:show] do
+    collection do
+      get 'confirm_list'
+    end
+  end
 
   resources :group_chats
 
@@ -11,6 +15,8 @@ Rails.application.routes.draw do
   resources :roles
 
   resources :homes
+
+  resources :users, only: [:index]
 
   resources :managements do
     collection do

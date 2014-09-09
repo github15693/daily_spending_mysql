@@ -7,7 +7,6 @@ class Ability
     elsif user && user.persisted?
        can :read, :all
     end
-
     can :manage , :session
     can :manage , :registration
   end

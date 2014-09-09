@@ -2,14 +2,19 @@ require 'socket'
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  include ActionController::MimeResponds
+  include ApplicationHelper
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
   before_action :set_tab
   before_action :get_friend_list
-  authorize_resource :class => false
-  include ActionController::MimeResponds
-  include ApplicationHelper
+  before_action :total_confirm
+  authorize_resource :class=> false
+
+  def total_confirm
+    @total_confirm = FriendList.where(confirm_user: current_user.id.to_i).size > 0 ? FriendList.where(confirm_user: current_user.id).size : 0
+  end
 
   def get_friend_list
     unless current_user.blank?
@@ -47,9 +52,7 @@ class ApplicationController < ActionController::Base
           render :file => "#{Rails.root}/public/422.html", :status => 403, :layout => false
         end
       end
-
       format.json do
-
         render json: {status: 403, message: "You are not allowed to access this resource."}, status: :forbidden
       end
       format.js do

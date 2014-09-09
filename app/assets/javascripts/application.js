@@ -28,6 +28,7 @@
 //= require_tree .
 
 jQuery(function () {
+
     $('.best_in_place').best_in_place()
     $(document).on('click', '.in_place_class', function () {
         $('.in_place_class span form input:text').addClass('form-control input-sm');
@@ -42,3 +43,15 @@ function delayedAlert(msg, time) {
         $('#notifications').html('');
     }, time);
 };
+
+//effect border
+function borderEffect(selector, cssEffect, num_effect, deplay){
+    var i=0
+    var temp = setInterval(function(){
+        i++;
+        if (i ==num_effect*2){
+            clearInterval(temp)
+        }
+        $(selector).toggleClass(cssEffect);
+    },deplay)
+}

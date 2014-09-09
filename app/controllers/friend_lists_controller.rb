@@ -1,6 +1,6 @@
 class FriendListsController < ApplicationController
   before_action :set_friend_list, only: [:show, :edit, :update, :destroy]
-
+  skip_authorize_resource
   # GET /friend_lists
   # GET /friend_lists.json
   def index
@@ -25,16 +25,21 @@ class FriendListsController < ApplicationController
   # POST /friend_lists.json
   def create
     @friend_list = FriendList.new(friend_list_params)
-
-    respond_to do |format|
+    @users = User.where("username <> \"Administrator\" and id <> #{current_user.id}")
+    @td_id = params[:friend_list][:td_id]
+    begin
       if @friend_list.save
-        format.html { redirect_to @friend_list, notice: 'Friend list was successfully created.' }
-        format.json { render :show, status: :created, location: @friend_list }
+          @result =1
+          @message = "Send request to #{User.find(params[:friend_list][:confirm_user]).full_name} was successfully!"
       else
-        format.html { render :new }
-        format.json { render json: @friend_list.errors, status: :unprocessable_entity }
+        @result =0
+        @message = "Send request to #{User.find(params[:confirm_user].full_name)} was error!"
       end
-    end
+    @total_confirm = FriendList.where(confirm_user: @friend_list.confirm_user.to_i).size > 0 ? FriendList.where(confirm_user: @friend_list.confirm_user.to_i).size : 0
+    else
+      @result =0
+      @message = "Some thing is error!"
+      end
   end
 
   # PATCH/PUT /friend_lists/1
@@ -60,6 +65,16 @@ class FriendListsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def confirm_list
+    @confirm_lists = FriendList.where(confirm_user: current_user.id, is_confirm: false)
+    arr_group_id  = []
+    @confirm_lists.each do |user|
+      arr_group_id << user.request_user
+    end
+    @users = User.where("id in (#{arr_group_id.join(',')})")
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

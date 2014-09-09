@@ -1,0 +1,18 @@
+<% publish_to "/users/#{current_user.id}" do %>
+    <% if @result == 1 %>
+        delayedAlert('<%= @message %>', 1000);
+        $('.datatable').find('form#<%= @td_id %>').closest('td').html('Waitting confirm')
+    <% else %>
+        delayedAlert('<%= @message %>', 1000);
+    <% end %>
+<% end %>
+
+<% publish_to "/realtime" do %>
+    $('.datatable').find('form#<%= @td_id %>').closest('td').html('Waitting confirm')
+<% end %>
+
+<% publish_to "/users/#{@friend_list.confirm_user}" do %>
+    $('.count-confirm').html('<%= @total_confirm %>')
+    borderEffect('.count-confirm', 'border-effect-count-confirm', 3, 150)
+<% end %>
+
