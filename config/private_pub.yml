@@ -2,10 +2,10 @@ development:
   server: "http://games156.com:9292/faye"
   secret_token: "secret"
 test:
-  server: "http://games156.com:9292/faye"
+  server: "http://192.168.1.62:9292/faye"
   secret_token: "secret"
 production:
-  server: "http://games156.com/faye"
+  server: "http://192.168.1.62:9292/faye"
   secret_token: "efca6ac29b41650d68e9ad88ba10f02faa73b35e2d33a92b98b2eb20377856c6"
   signature_expiration: 3600 # one hour
   port: 4443
