@@ -88,13 +88,8 @@
   Friend List
 </div>
   <div id="chat" class="friend-list" style="display: none">
-    <% unless @friend_list.blank? %>
-        <% @friend_list.each do |friend| %>
-        <h5><%= friend.full_name.blank? ? friend.username.truncate(16, separator:' ') : friend.full_name.truncate(16) %></h5>
-            <% end %>
-    <% else %>
-
-    <% end %>
+    <%= render 'friend_lists/index' %>
+    <div id="temp"></div>
   </div>
 </div>
 

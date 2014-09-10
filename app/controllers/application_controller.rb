@@ -14,20 +14,20 @@ class ApplicationController < ActionController::Base
 
   def total_confirm
     unless current_user.blank?
-      @total_confirm = FriendList.where(confirm_user: current_user.id.to_i).size > 0 ? FriendList.where(confirm_user: current_user.id).size : 0
+      @total_confirm = FriendList.where(confirm_user: current_user.id, is_confirm: 0).size > 0 ? FriendList.where(confirm_user: current_user.id, is_confirm: 0).size : 0
     end
   end
 
   def get_friend_list
     unless current_user.blank?
       temp = FriendList.where("(request_user= #{current_user.id} OR confirm_user = #{current_user.id}) AND is_confirm = #{true}")
-      @friend_list = []
+      @friend_lists = []
       unless temp.blank?
         temp.each do |t|
           if t.request_user.to_i == current_user.id.to_i
-            @friend_list << User.find(t.confirm_user.to_i)
+            @friend_lists << User.find(t.confirm_user.to_i)
           else
-            @friend_list << User.find(t.request_user.to_i)
+            @friend_lists << User.find(t.request_user.to_i)
           end
         end
       end

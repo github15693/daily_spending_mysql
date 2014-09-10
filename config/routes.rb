@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :friend_lists, :except=>[:index,:new,:show] do
     collection do
       get 'confirm_list'
+      post 'confirm'
     end
   end
 

@@ -28,18 +28,23 @@ class FriendListsController < ApplicationController
     @users = User.where("username <> \"Administrator\" and id <> #{current_user.id}")
     @td_id = params[:friend_list][:td_id]
     begin
+      if FriendList.where(request_user: params[:friend_list][:request_user], confirm_user: params[:friend_list][:confirm_user]).size > 0
+        @result =0
+        @message = "Waitting confirm!"
+        return false
+      end
       if @friend_list.save
           @result =1
           @message = "Send request to #{User.find(params[:friend_list][:confirm_user]).full_name} was successfully!"
       else
         @result =0
-        @message = "Send request to #{User.find(params[:confirm_user].full_name)} was error!"
+        @message = "Send request to #{User.find(params[:friend_list][:confirm_user]).full_name} was error!"
       end
-    @total_confirm = FriendList.where(confirm_user: @friend_list.confirm_user.to_i).size > 0 ? FriendList.where(confirm_user: @friend_list.confirm_user.to_i).size : 0
+    @total_confirm = FriendList.where(confirm_user: @friend_list.confirm_user.to_i, is_confirm: 0).size > 0 ? FriendList.where(confirm_user: @friend_list.confirm_user.to_i, is_confirm: 0).size : 0
     else
       @result =0
       @message = "Some thing is error!"
-      end
+    end
   end
 
   # PATCH/PUT /friend_lists/1
@@ -67,14 +72,38 @@ class FriendListsController < ApplicationController
   end
 
   def confirm_list
-    @confirm_lists = FriendList.where(confirm_user: current_user.id, is_confirm: false)
-    arr_group_id  = []
-    @confirm_lists.each do |user|
-      arr_group_id << user.request_user
+    @confirm_lists = FriendList.where(confirm_user: current_user.id, is_confirm: 0)
+    @users  = []
+    @confirm_lists.each do |frl|
+      user = User.find(frl.request_user)
+      temp = {}
+      temp[:id]= user.id
+      temp[:full_name] = user.full_name
+      temp[:username] = user.email
+      temp[:address] = user.address
+      temp[:friend_list_id] = frl.id
+      @users << Hashie::Mash.new(temp)
     end
-    @users = User.where("id in (#{arr_group_id.join(',')})")
   end
 
+  def confirm
+    confirm_id = params[:confirm_id]
+    @td_id = params[:td_id]
+    begin
+      if FriendList.find(confirm_id).update(is_confirm: 1)
+        @request_user = FriendList.find(confirm_id).request_user
+        @result =1
+        @message = "Confirm success!"
+        @total_confirm = FriendList.where(confirm_user: current_user.id, is_confirm: 0).size > 0 ? FriendList.where(confirm_user: current_user.id, is_confirm: 0).size : 0
+      else
+        @result =0
+        @message = "Failed!"
+      end
+    rescue
+      @result =0
+      @message = "Some thing is error!"
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

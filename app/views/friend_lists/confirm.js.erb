@@ -1,0 +1,41 @@
+<% publish_to "/users/#{current_user.id}" do %>
+    <% if @result == 1 %>
+$('.datatable').find('form#<%= @td_id %>').closest('td').html('Friend')
+$('.count-confirm').html('<%= @total_confirm %>')
+<% temp = FriendList.where("(request_user= #{current_user.id} OR confirm_user = #{current_user.id}) AND is_confirm = #{true}")
+      @friend_lists = []
+      unless temp.blank?
+        temp.each do |t|
+          if t.request_user.to_i == current_user.id.to_i
+            @friend_lists << User.find(t.confirm_user.to_i)
+          else
+            @friend_lists << User.find(t.request_user.to_i)
+          end
+        end
+      end %>
+$('#chat').html('<%=j render 'friend_lists/index' %>')
+$('#temp').html('<%= @friend_lists.size %>')
+borderEffect('.count-confirm', 'border-effect-count-confirm', 3, 150)
+delayedAlert('<%= @message %>', 1000);
+    <% else %>
+delayedAlert('<%= @message %>', 1000);
+    <% end %>
+<% end %>
+
+<% unless @request_user.blank? %>
+<% publish_to "/users/#{@request_user}" do %>
+<% temp = FriendList.where("(request_user= #{@request_user} OR confirm_user = #{@request_user}) AND is_confirm = #{true}")
+      @friend_lists = []
+      unless temp.blank?
+        temp.each do |t|
+          if t.request_user.to_i == current_user.id.to_i
+            @friend_lists << User.find(t.confirm_user.to_i)
+          else
+            @friend_lists << User.find(t.request_user.to_i)
+          end
+        end
+      end %>
+$('#chat').html('<%=j render 'friend_lists/index' %>')
+delayedAlert('\'<%= current_user.full_name %>\' just accept your request!', 1000);
+<% end %>
+<% end %>
