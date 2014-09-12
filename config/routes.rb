@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :individual_chats, only: [:create] do
+    collection do
+      get 'open_chat_box'
+    end
+  end
+
   resources :group_chats
 
   resources :group_chat_lists

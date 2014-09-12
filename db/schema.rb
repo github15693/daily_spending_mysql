@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140907042803) do
+ActiveRecord::Schema.define(version: 20140911151712) do
 
   create_table "date_expiries", force: true do |t|
     t.date     "date_expiry"
@@ -70,6 +70,14 @@ ActiveRecord::Schema.define(version: 20140907042803) do
     t.string   "message"
     t.integer  "group_chat_list_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "individual_chats", force: true do |t|
+    t.integer  "sending_user"
+    t.integer  "receiving_user"
+    t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

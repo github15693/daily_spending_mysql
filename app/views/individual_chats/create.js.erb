@@ -1,0 +1,22 @@
+<% publish_to "/users/#{@sending_user}" do %>
+    <%
+    @my_name = User.find(@sending_user).full_name.blank? ? User.find(@sending_user).username.truncate(16, separator:' ') : User.find(@sending_user).full_name.truncate(16)
+    @message = @individual_chat.message
+    %>
+    $('#one-message').append('<%=j render 'homes/message_me' %>')
+    $('.chat-box-body').animate({"scrollTop": $('.chat-box-body')[0].scrollHeight}, "slow");
+    //$('.chat-box-body').scrollTop($('.chat-box-body')[0].scrollHeight)
+    $('#content-chat').val('')
+    $('#content-chat').focus()
+<% end %>
+
+<% publish_to "/users/#{@receiving_user}" do %>
+    <%
+    @my_name = User.find(@receiving_user).full_name.blank? ? User.find(@receiving_user).username.truncate(16, separator:' ') : User.find(@receiving_user).full_name.truncate(16)
+    @message = @individual_chat.message
+    %>
+    $('#one-message').append('<%=j render 'homes/message_u' %>')
+    $('.chat-box-body').animate({"scrollTop": $('.chat-box-body')[0].scrollHeight}, "slow");
+    $('#content-chat').val('')
+    $('#content-chat').focus()
+<% end %>

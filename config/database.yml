@@ -15,8 +15,8 @@ default: &default
   pool: 5
   username: root
   password: a
-  socket: /var/run/mysqld/mysqld.sock
-
+#  socket: /var/run/mysqld/mysqld.sock
+  url: 'mysql2://root:a@localhost/daily_spending2_development'
 development:
   <<: *default
   database: daily_spending2_development

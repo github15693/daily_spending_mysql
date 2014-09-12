@@ -1,0 +1,84 @@
+<div id='chat-box' class="chat-box-1">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-comment"></span>&nbsp;<%= @chat_with_user_name %>
+      <div class="btn-group pull-right">
+        <a class="glyphicon glyphicon-chevron-down color-white font-size-20" onclick="toggleChat()"></a>
+        <a class="glyphicon glyphicon-cog dropdown-toggle color-white font-size-20 margin-left-5" data-toggle="dropdown"></a>
+        <a class="glyphicon glyphicon-remove color-white font-size-20 margin-left-5" onclick="closeChatBox()"></a>
+        <ul class="dropdown-menu slidedown">
+          <li><a href=""><span class="glyphicon glyphicon-refresh">
+                            </span>Refresh</a></li>
+          <li><a href=""><span class="glyphicon glyphicon-ok-sign">
+                            </span>Available</a></li>
+          <li><a href=""><span class="glyphicon glyphicon-remove">
+                            </span>Busy</a></li>
+          <li><a href=""><span class="glyphicon glyphicon-time"></span>
+            Away</a></li>
+          <li class="divider"></li>
+          <li><a href=""><span class="glyphicon glyphicon-off"></span>
+            Sign Out</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="panel-body chat-box-body">
+      <% unless @contents.blank? %>
+      <ul class="chat" id="one-message">
+        <% @contents.each do |msg| %>
+            <% if msg.receiving_user.to_i == current_user.id.to_i %>
+        <!--Message left-->
+        <li class="left clearfix"><span class="chat-img pull-left">
+                            <img src="/images/u.gif" alt="User Avatar" class="img-circle"/>
+                        </span>
+          <div class="chat-body clearfix">
+            <div class="header">
+              <strong class="primary-font"><%= @chat_with_user_name %></strong>
+              <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span><%= msg.created_at.to_time_in_current_zone %>
+              </small>
+            </div>
+            <p>
+              <%= msg.message %>
+            </p>
+          </div>
+        </li>
+            <% else %>
+        <!--Message right-->
+        <li class="right clearfix"><span class="chat-img pull-right">
+                            <img src="/images/me.gif" alt="User Avatar" class="img-circle"/>
+                        </span>
+          <div class="chat-body clearfix">
+            <div class="header">
+              <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><%= msg.created_at.to_time_in_current_zone %></small>
+              <strong class="pull-right primary-font"><%= @my_name %></strong>
+            </div>
+            <p>
+              <%= msg.message %>
+            </p>
+          </div>
+        </li>
+        <% end %>
+        <% end %>
+      </ul>
+      <% else %>
+      empty
+      <% end %>
+    </div>
+    <div class="panel-footer chat-box-footer">
+      <div class="input-group">
+        <input id="content-chat" data-sending-user='<%= current_user.id %>' data-receiving-user='<%= @chat_with_user_id %>' type="text"  class="form-control input-sm" placeholder="Type your message here..."/>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" id="btn-send-message">
+                      Send
+                    </button>
+                </span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+<script>
+  $(function(){
+      $('#btn-send-message').prop('disabled',true)
+  })
+</script>

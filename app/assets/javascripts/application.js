@@ -28,6 +28,7 @@
 //= require_tree .
 
 jQuery(function () {
+    $( document ).tooltip();
 
     $('.best_in_place').best_in_place()
     $(document).on('click', '.in_place_class', function () {

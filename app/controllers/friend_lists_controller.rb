@@ -28,8 +28,8 @@ class FriendListsController < ApplicationController
     @users = User.where("username <> \"Administrator\" and id <> #{current_user.id}")
     @td_id = params[:friend_list][:td_id]
     begin
-      if FriendList.where(request_user: params[:friend_list][:request_user], confirm_user: params[:friend_list][:confirm_user]).size > 0
-        @result =0
+      if FriendList.where(request_user: params[:friend_list][:request_user], confirm_user: params[:friend_list][:confirm_user]).size > 0 || FriendList.where(confirm_user: params[:friend_list][:request_user], request_user: params[:friend_list][:confirm_user]).size > 0
+        @result = 0
         @message = "Waitting confirm!"
         return false
       end

@@ -38,8 +38,10 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="<%= 'active' if !session[:nav_tab].blank? && session[:nav_tab] == :homes %>"><a href="/homes">Home</a></li>
-              <li class="<%= 'active' if !session[:nav_tab].blank? && session[:nav_tab] == :managements %>"><a href="/managements">Spending Management</a></li>
+              <li class="<%= 'active' if !session[:nav_tab].blank? && session[:nav_tab] == :homes %>">
+                <a href="/homes">Home</a></li>
+              <li class="<%= 'active' if !session[:nav_tab].blank? && session[:nav_tab] == :managements %>">
+                <a href="/managements">Spending Management</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to 'Profile ' + current_user.username if current_user.username %></li>
@@ -69,28 +71,31 @@
     </div>
   </div>
 </div>
-<p>Move the mouse pointer over this paragraph.</p>
 
 <div>
-  <div class="bg-icon-left-add-friend" onclick="get_user()">
+  <div class="bg-icon-left-add-friend" onclick="get_user()" title="Click to search friend!">
     <label class="margin-left-10">Add friends</label>
-    <%= image_tag 'add_friend.png', class: 'add-friend-icon'%>
+    <%= image_tag 'add_friend.png', class: 'add-friend-icon' %>
   </div>
-  <div class="bg-icon-left-comfirmation margin-top-70" onclick="get_confirm()">
+  <div class="bg-icon-left-comfirmation margin-top-70" onclick="get_confirm()" title="Click to confirm request!">
     <label class="margin-left-10">Confirmation</label>
-    <%= image_tag 'confirm.png', class: 'add-friend-icon'%>
+    <%= image_tag 'confirm.png', class: 'add-friend-icon' %>
     <label class="count-confirm"><%= @total_confirm %></label>
   </div>
 </div>
 
-<div  class="friend-list-frame">
-<div class="friend-list-title" style="text-align: center" onclick="friendList()">
-  Friend List
-</div>
+<div class="friend-list-frame">
+  <div class="friend-list-title" style="text-align: center" onclick="friendList()">
+    Friend List
+  </div>
   <div id="chat" class="friend-list" style="display: none">
     <%= render 'friend_lists/index' %>
     <div id="temp"></div>
   </div>
+</div>
+
+<div id="chat-box-frame">
+
 </div>
 
 <div class="modal fade" id="app-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -131,53 +136,5 @@
 
 </body>
 </html>
-
-<script>
-
-  $(function(){
-      $(".bg-icon-left-add-friend").hover(
-              function(){
-                  $(this).filter(':not(:animated)').animate({
-                      marginLeft:'0px'
-                  },'slow');
-// This only fires if the row is not undergoing an animation when you mouseover it
-              },
-              function() {
-                  $(this).animate({
-                      marginLeft:'-120px'
-                  },'slow');
-              });
-      $(".bg-icon-left-comfirmation").hover(
-              function(){
-                  $(this).filter(':not(:animated)').animate({
-                      marginLeft:'0px'
-                  },'slow');
-// This only fires if the row is not undergoing an animation when you mouseover it
-              },
-              function() {
-                  $(this).animate({
-                      marginLeft:'-130px'
-                  },'slow');
-              });
-
-  });
-    function friendList(){
-        $('.friend-list').slideToggle()
-    }
-
-    function setLanguage(val) {
-        $.post('/homes/setLanguage', {val: val}, function () {
-            location.reload(true);
-        });
-    }
-
-    function get_user(){
-        $.get('/users');
-
-    }
-    function get_confirm(){
-        $.get('/friend_lists/confirm_list');
-    }
-</script>
 
 

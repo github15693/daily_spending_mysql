@@ -9,7 +9,7 @@
 
 .friend-list{
     width: 200px;
-    height: 500px;
+    height: 450px;
     overflow: scroll;
 }
 .friend-list-title{
@@ -22,6 +22,24 @@
     background: -moz-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
     background: -ms-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
     background: linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+}
+div.nick-chat{
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+div.nick-chat:hover{
+    cursor: pointer;
+    background: -webkit-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: -moz-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: -ms-linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+    background: linear-gradient(#FBFBFB, #F3EEEE, #D0D0D0);
+}
+div.nick-chat .online-icon{
+    color: #CE2B43;
+}
+div.nick-chat .offline-icon{
+    color: #000000;
 }
 /*-webkit-animation: showFrienListFrame 2s ;*/
 /*-moz-animation: showFrienListFrame 2s ;*/

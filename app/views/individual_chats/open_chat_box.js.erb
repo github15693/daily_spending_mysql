@@ -1,0 +1,4 @@
+<% if @result==1 %>
+$('#chat-box-frame').html('<%=j render 'homes/chat_box' %>')
+$('.chat-box-body').scrollTop($('.chat-box-body')[0].scrollHeight)
+<% end %>

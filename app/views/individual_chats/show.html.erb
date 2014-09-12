@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sending user:</strong>
+  <%= @individual_chat.sending_user %>
+</p>
+
+<p>
+  <strong>Receiving user:</strong>
+  <%= @individual_chat.receiving_user %>
+</p>
+
+<p>
+  <strong>Message:</strong>
+  <%= @individual_chat.message %>
+</p>
+
+<%= link_to 'Edit', edit_individual_chat_path(@individual_chat) %> |
+<%= link_to 'Back', individual_chats_path %>

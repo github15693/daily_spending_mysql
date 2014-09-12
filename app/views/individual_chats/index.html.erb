@@ -1,0 +1,29 @@
+<h1>Listing individual_chats</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sending user</th>
+      <th>Receiving user</th>
+      <th>Message</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @individual_chats.each do |individual_chat| %>
+      <tr>
+        <td><%= individual_chat.sending_user %></td>
+        <td><%= individual_chat.receiving_user %></td>
+        <td><%= individual_chat.message %></td>
+        <td><%= link_to 'Show', individual_chat %></td>
+        <td><%= link_to 'Edit', edit_individual_chat_path(individual_chat) %></td>
+        <td><%= link_to 'Destroy', individual_chat, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Individual chat', new_individual_chat_path %>

@@ -3,6 +3,9 @@ body{
   margin-top: 50px;
   background: url("/assets/body-bg.png");
 }
+a:hover{
+  text-decoration: none;
+}
 .in_place_class input[type='text']{
   max-width: 120px;
 }
@@ -144,6 +147,9 @@ hr{
 }
 .margin-left-10{
   margin-left: 10px;
+}
+.margin-left-5{
+  margin-left: 5px;
 }
 .font-size-20{
   font-size: 20px;

@@ -1,6 +1,6 @@
 <% unless @friend_lists.blank? %>
     <% @friend_lists.each do |friend| %>
-        <h5><%= friend.full_name.blank? ? friend.username.truncate(16, separator:' ') : friend.full_name.truncate(16) %></h5>
+        <div onclick="openChatBox('<%= current_user.id %>','<%= friend.id %>')" class="nick-chat" data-chat-id="<%= friend.id %>"><span  class="glyphicon glyphicon-heart online-icon"></span><a >&nbsp;<%= friend.full_name.blank? ? friend.username.truncate(16, separator:' ') : friend.full_name.truncate(16) %></a></div>
     <% end %>
-<% else %>
+    <% else %>
 <% end %>

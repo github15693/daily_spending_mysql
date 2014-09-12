@@ -28,7 +28,7 @@ delayedAlert('<%= @message %>', 1000);
       @friend_lists = []
       unless temp.blank?
         temp.each do |t|
-          if t.request_user.to_i == current_user.id.to_i
+          if t.request_user.to_i == @request_user.to_i
             @friend_lists << User.find(t.confirm_user.to_i)
           else
             @friend_lists << User.find(t.request_user.to_i)

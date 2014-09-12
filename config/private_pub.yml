@@ -1,5 +1,5 @@
 development:
-  server: "http://192.168.1.165:9292/faye"
+  server: "http://192.168.1.156:9292/faye"
   secret_token: "secret"
   port: 4443
   ssl: true
@@ -8,10 +8,10 @@ development:
   environment: production
   rackup: private_pub.ru
 test:
-  server: "http://192.168.1.165:9292/faye"
+  server: "http://192.168.1.156:9292/faye"
   secret_token: "secret"
 production:
-  server: "http://192.168.1.165:9292/faye"
+  server: "http://192.168.1.156:9292/faye"
   secret_token: "efca6ac29b41650d68e9ad88ba10f02faa73b35e2d33a92b98b2eb20377856c6"
   signature_expiration: 3600 # one hour
   port: 4443
