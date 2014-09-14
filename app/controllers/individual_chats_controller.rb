@@ -63,13 +63,13 @@ class IndividualChatsController < ApplicationController
       sending_user = params[:sending_user].to_i.blank? ? 0: params[:sending_user].to_i
       receiving_user = params[:receiving_user].to_i.blank? ? 0: params[:receiving_user].to_i
       if IndividualChat.where(sending_user: sending_user, receiving_user: receiving_user).size > 0 || IndividualChat.where(sending_user: receiving_user, receiving_user: sending_user).size > 0
-        @contents = IndividualChat.where("(sending_user=#{sending_user} and receiving_user=#{receiving_user}) or (sending_user=#{receiving_user} and receiving_user=#{sending_user})")
-        @chat_with_user_name = User.find(receiving_user).full_name.blank? ? User.find(receiving_user).username.truncate(16, separator:' ') : User.find(receiving_user).full_name.truncate(16)
-        @chat_with_user_id = User.find(receiving_user).id
-        @my_name = User.find(sending_user).full_name.blank? ? User.find(sending_user).username.truncate(16, separator:' ') : User.find(sending_user).full_name.truncate(16)
-        @my_id = User.find(sending_user).id
-        return @result=1
-      else
+      #   @contents = IndividualChat.where("(sending_user=#{sending_user} and receiving_user=#{receiving_user}) or (sending_user=#{receiving_user} and receiving_user=#{sending_user})")
+      #   @chat_with_user_name = User.find(receiving_user).full_name.blank? ? User.find(receiving_user).username.truncate(16, separator:' ') : User.find(receiving_user).full_name.truncate(16)
+      #   @chat_with_user_id = User.find(receiving_user).id
+      #   @my_name = User.find(sending_user).full_name.blank? ? User.find(sending_user).username.truncate(16, separator:' ') : User.find(sending_user).full_name.truncate(16)
+      #   @my_id = User.find(sending_user).id
+      #   return @result=1
+      # else
         @contents = IndividualChat.where("(sending_user=#{sending_user} and receiving_user=#{receiving_user}) or (sending_user=#{receiving_user} and receiving_user=#{sending_user})")
         @chat_with_user_name = User.find(receiving_user).full_name.blank? ? User.find(receiving_user).username.truncate(16, separator:' ') : User.find(receiving_user).full_name.truncate(16)
         @chat_with_user_id = User.find(receiving_user).id
