@@ -90,6 +90,9 @@ class IndividualChatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def individual_chat_params
+      unless params[:individual_chat][:message].blank?
+        params[:individual_chat][:message] = encrypt params[:individual_chat][:message]
+      end
       params.require(:individual_chat).permit(:sending_user, :receiving_user, :message)
     end
 end

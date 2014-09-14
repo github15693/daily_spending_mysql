@@ -29,6 +29,9 @@ $(function () {
         testNullToDisabled('#content-chat','#btn-send-message')
     })
 
+    function sendMessage(sending_user, receiving_user, message){
+        $.post('/individual_chats',{'individual_chat[sending_user]':sending_user,'individual_chat[receiving_user]':receiving_user, 'individual_chat[message]':message})
+    }
     //event keyup
     $(document).on('keyup','#content-chat',function(){
         testNullToDisabled('#content-chat','#btn-send-message')
@@ -36,9 +39,6 @@ $(function () {
 
 });
 
-function sendMessage(sending_user, receiving_user, message){
-    $.post('/individual_chats',{'individual_chat[sending_user]':sending_user,'individual_chat[receiving_user]':receiving_user, 'individual_chat[message]':message})
-}
 
 function testNullToDisabled(selectorToGetVal, selectorToDisabled){
     if($(selectorToGetVal).val()== ''){

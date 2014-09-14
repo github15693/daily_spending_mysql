@@ -5,11 +5,11 @@
     <div class="header">
       <strong class="primary-font"><%= @chat_with_user_name %></strong>
       <small class="pull-right text-muted">
-        <span class="glyphicon glyphicon-time"></span>12 mins ago
+        <span class="glyphicon glyphicon-time"></span><%= @created_at.strftime('%H:%M:%S %d/%m/%Y') %>
       </small>
     </div>
     <p>
-      <%= @message %>
+      <%= decrypt @message %>
     </p>
   </div>
 </li>

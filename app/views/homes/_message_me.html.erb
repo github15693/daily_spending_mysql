@@ -3,11 +3,11 @@
                         </span>
   <div class="chat-body clearfix">
     <div class="header">
-      <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+      <small class=" text-muted"><span class="glyphicon glyphicon-time"></span><%= @created_at.strftime('%H:%M:%S %d/%m/%Y') %></small>
       <strong class="pull-right primary-font"><%= @my_name %></strong>
     </div>
     <p>
-      <%= @message %>
+      <%= decrypt @message %>
     </p>
   </div>
 </li>
