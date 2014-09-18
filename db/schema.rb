@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140911151712) do
+ActiveRecord::Schema.define(version: 20140915081711) do
 
   create_table "date_expiries", force: true do |t|
     t.date     "date_expiry"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(version: 20140911151712) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

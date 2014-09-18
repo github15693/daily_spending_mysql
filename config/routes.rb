@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # env['devise.mapping'] = Devise.mappings[:user]
+
 
   resources :friend_lists, :except=>[:index,:new,:show] do
     collection do
@@ -32,14 +34,22 @@ Rails.application.routes.draw do
       post 'update_money_init'
     end
   end
-
   devise_for :users, :controllers => {:registrations =>
                                           "registrations", :confirmations => "confirmations", :sessions =>
-                                          "sessions"}
+                                          "sessions"}#, omniauth_callbacks: "omniauth_callbacks"
+  devise_scope :user do
+    get 'auth/:provider/callback'=> 'sessions#create_auth'
+  end
+
   authenticated :user do
     root :to => 'homes#index', :as => :authenticated_root
   end
+
   root :to => redirect('/users/sign_in')
+
+
+  # match 'auth/failure', to: redirect('/'), via: [:get, :post]
+  # match 'sign_out', to: 'sessions#destroy', as: 'sign_out', via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

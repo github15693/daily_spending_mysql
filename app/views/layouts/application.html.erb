@@ -44,7 +44,7 @@
                 <a href="/managements">Spending Management</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to 'Profile ' + current_user.username if current_user.username %></li>
+              <li><%= link_to "Profile #{current_user.username.blank? ? current_user.full_name : current_user.username}" %></li>
               <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
             </ul>
           </div>
@@ -130,7 +130,7 @@
     </div>
   </div>
 </div>
-
+<%= audio_tag "chat_msg.mp3", id:'audio-msg-chat' %>
 <%= subscribe_to "/realtime" %>
 <%= subscribe_to "/users/#{current_user.id}" %>
 

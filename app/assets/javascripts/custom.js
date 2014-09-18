@@ -27,6 +27,7 @@ $(function () {
     $(document).on('change','#content-chat',function(){
         sendMessage($('#content-chat').data('sending-user'),$('#content-chat').data('receiving-user'),$('#content-chat').val())
         testNullToDisabled('#content-chat','#btn-send-message')
+
     })
 
     function sendMessage(sending_user, receiving_user, message){

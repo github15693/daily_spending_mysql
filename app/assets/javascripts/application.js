@@ -36,6 +36,7 @@ jQuery(function () {
         $('.in_place_class span form input:button').addClass('btn btn-danger');
         $('.in_place_class span form input:submit').addClass('btn btn-primary');
     })
+
 })
 //function alert message
 function delayedAlert(msg, time) {
@@ -56,3 +57,5 @@ function borderEffect(selector, cssEffect, num_effect, deplay){
         $(selector).toggleClass(cssEffect);
     },deplay)
 }
+
+

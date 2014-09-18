@@ -58,12 +58,15 @@ gem 'redis'
 gem 'private_pub'
 gem 'thin'
 # use 'Hashie' to convert json to object
-gem 'hashie'
+gem 'hashie', '~> 3.2.0'
 # encrypt and decrypt data
 gem 'aescrypt'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+# OmniAuth
+# gem 'omniauth', '~> 1.1.4'
+gem 'omniauth-twitter', '~> 1.0.0'
+gem 'omniauth-facebook', '~> 1.4.1'
 # Use unicorn as the app server
 # gem 'unicorn'
 

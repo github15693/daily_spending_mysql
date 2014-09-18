@@ -35,8 +35,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_tab
-    # @serverSocket = TCPServer.new('','')
-    # @serverSocket.setsockopt(Socket::SDL_Socket, Socket::SO_REUSEADDR, 1)
     session['nav_tab'.to_sym] = controller_name.to_sym
   end
 
